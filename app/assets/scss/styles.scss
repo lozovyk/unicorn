@@ -1,0 +1,15 @@
+//@import "../../../node_modules/normalize-scss/sass/normalize";
+@import "../../../node_modules/normalize-scss/sass/normalize/import-now";
+@import "base/var";
+@import "common/general";
+@import "../fonts/flaticon";
+@import "base/grid";
+@import "common/fonts";
+@import "base/header";
+@import "common/slider";
+@import "common/glihtbox";
+
+
+@import "intro";
+@import "gallery";
+@import "contact";

@@ -1,0 +1,100 @@
+doctype html
+html(lang="en")
+  head
+    include components/core/head
+  body
+    header
+      include components/menu
+    main
+      section#intro.intro
+        img.fly(src="./assets/img/rectangle.svg")
+        .container.h-100
+          .row.h-100.justify-content-center.align-items-center
+            .col-md-6.order-md-1.order-2
+              h4.intro-sub-title Interactive
+              h1.intro-title
+                | We Create Technology
+              p.intro-description
+                | Comes with amazing customization features. Offers various options to create your website.
+              a.intro-learnmore(href="#gallery")
+                i.fi.flaticon-arrow
+                //img.intro-scrooldown-icon(src="./assets/img/icons/download-arrow.svg")
+                | Learn More
+            .col-md-6.order-md-2.order-1
+              img.intro-product.embed-responsive(src="./assets/img/product.png")
+              .intro-dots
+              .intro-social-icons
+                a(href='#')
+                  i.fi.flaticon-twitter
+                a(href='#')
+                  i.fi.flaticon-facebook-logo
+                a(href='#')
+                  i.fi.flaticon-logo
+      section#gallery
+        .container
+          .row
+            .col-12
+              h3.gallery-title Gallery
+          .row
+            .glide
+              .glide__track(data-glide-el='track')
+                ul.glide__slides
+                  li.glide__slide
+                    a.slider-thumbnail.glightbox(href="./assets/img/slide-1.jpg")
+                      img.slider-image(src="./assets/img/slide-1.jpg")
+                    .slider-title Management Systems
+                    .slider-subtitle Design
+                  li.glide__slide
+                    a(href="#")
+                      a.slider-thumbnail.glightbox(href="./assets/img/slide-2.jpg")
+                        img.slider-image(src="./assets/img/slide-2.jpg")
+                      .slider-title Efficient Service
+                      .slider-subtitle Technology
+                  li.glide__slide
+                    a(href="#")
+                      a.slider-thumbnail.glightbox(href="./assets/img/slide-3.jpg")
+                        img.slider-image(src="./assets/img/slide-3.jpg")
+                      .slider-title Multifunction
+                      .slider-subtitle Medical
+              //.glide__arrows(data-glide-el='controls')
+              //  button.glide__arrow.glide__arrow--left(data-glide-dir='<') prev
+              //  button.glide__arrow.glide__arrow--right(data-glide-dir='>') next
+
+      section#contact
+        .container
+          .row
+            .col-12
+              h3.contact-title Contact us
+          .row
+            .col-md-10.col-sm-12.col-xl-8
+              form.contact-form(action='')
+                .container
+                  .row
+                    fieldset.col.col-f
+                      input(style="margin-right:10px")(
+                        type='text'
+                        name='Name'
+                        required
+                      )
+                      label Your Name
+                    fieldset.col
+                      input.col(
+                        type='text'
+                        name='Email'
+                        required
+                      )
+                      label E-mail
+                div(include='form-input-select()')
+                  select#form-select(required='')
+                    option(value='', hidden='') Example Placeholder
+                    option(value='1') Order
+                    option(value='2') Question
+                button#submitbutton(
+                  type='submit'
+                  name='Send'
+                )
+                  | Submit
+
+
+    //include components/module
+    include components/core/scripts
