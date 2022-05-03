@@ -1,25 +1,28 @@
+// noinspection JSCheckFunctionSignatures
+
 const gulp = require("gulp");
 const pump = require("pump");
 const del = require("del");
 const vinylNamed = require("vinyl-named");
 const gulpPug = require("gulp-pug");
-const gulpSass = require("gulp-sass");
+// const gulpSass = require("gulp-sass");
 const gulpZip = require("gulp-zip");
 const gulpImagemin = require("gulp-imagemin");
 const imageminPngquant = require("imagemin-pngquant");
 const imageminJpegRecompress = require("imagemin-jpeg-recompress");
 const gulpSourcemaps = require("gulp-sourcemaps");
-const gulpPostcss = require("gulp-postcss");
+// const gulpPostcss = require("gulp-postcss");
 const gulpBabel = require("gulp-babel");
 const webpackStream = require("webpack-stream");
 const through2 = require("through2");
 const gulpUglify = require("gulp-uglify");
 const webpack = require("webpack");
-const autoprefixer = require("gulp-autoprefixer");
-const postcssUncss = require("postcss-uncss");
+const gulpSass = require("gulp-sass")(require("sass"));
+// const autoprefixer = require("gulp-autoprefixer");
+// const pluginsPostcss = require("postcss-uncss");
 const browserSync = require("browser-sync").create();
 
-gulpSass.compiler = require("node-sass");
+// gulpSass.compiler = require("gulp-sass");
 
 //CSS and JS Supported
 
@@ -47,7 +50,7 @@ const suppBrowsers = mode => {
     : supportedBrowsersBigList;
 };
 
-const autoprefixerConfig = { browsers: suppBrowsers(), cascade: false };
+// const autoprefixerConfig = { browsers: suppBrowsers(), cascade: false };
 const babelConfig = { targets: { browsers: suppBrowsers } };
 
 // Entry point retreive from webpack
@@ -59,7 +62,8 @@ const entryArray = Object.values(entry);
 const exportPath = "./dist/";
 
 const srcPath = (file, watch = false) => {
-  if (file === "scss" && watch === false) return "./app/assets/scss/styles.scss";
+  if (file === "scss" && watch === false)
+    return "./app/assets/scss/styles.scss";
   if (file === "scss" && watch === true) return "./app/assets/scss/**/*.scss";
   if (file === "js" && watch === false) return entryArray;
   if (file === "js" && watch === true) return "./app/assets/js/**/*.js";
@@ -73,7 +77,8 @@ const srcPath = (file, watch = false) => {
 };
 
 const distPath = (file, serve = false) => {
-  if (["css", "js", "img", "svg", "fonts"].includes(file)) return `./dist/assets/${file}`;
+  if (["css", "js", "img", "svg", "fonts"].includes(file))
+    return `./dist/assets/${file}`;
   if (file === "pug" && serve === false) return "./dist/**/*.html";
   if (file === "pug" && serve === true) return "./dist";
   console.error(
@@ -106,14 +111,14 @@ const buildImages = mode => done => {
     ? pump(
         [
           gulp.src(srcPath("img")),
-          // gulpImagemin([
-          //   gulpImagemin.gifsicle({ interlaced: true }),
-          //   gulpImagemin.jpegtran({ progressive: true }),
-          //   gulpImagemin.optipng({ optimizationLevel: 5 }),
-          //   gulpImagemin.svgo(),
-          //   imageminPngquant(),
-          //   imageminJpegRecompress()
-          // ]),
+          gulpImagemin([
+            gulpImagemin.gifsicle({ interlaced: true }),
+            gulpImagemin.jpegtran({ progressive: true }),
+            gulpImagemin.optipng({ optimizationLevel: 5 }),
+            gulpImagemin.svgo(),
+            imageminPngquant(),
+            imageminJpegRecompress()
+          ]),
           gulp.dest(distPath("img")),
           browserSync.stream()
         ],
@@ -138,15 +143,15 @@ const buildFonts = mode => done => {
 // Build Styles Task
 const buildStyles = mode => done => {
   let outputStyle;
-  if (mode === "development") outputStyle = "nested";
+  if (mode === "development") outputStyle = "expanded";
   else if (mode === "production") outputStyle = "compressed";
   else outputStyle = undefined;
 
-//   const postcssPlugins = [
-//   	autoprefixer(autoprefixerConfig),
-//   	postcssUncss({html: [distPath('pug')]}),
-//   ];
-//
+  // const postcssPlugins = [
+  //   autoprefixer(autoprefixerConfig),
+  //   pluginsPostcss({ html: [distPath("pug")] })
+  // ];
+
   ["development", "production"].includes(mode)
     ? pump(
         [
@@ -305,7 +310,7 @@ const genericTask = (mode, context = "building") => {
         })
       ),
       browserSync.reload
-  );
+    );
     browserSync.watch(distPath("pug")).on("change", browserSync.reload);
     done();
 
