@@ -1,9 +1,8 @@
 console.log("components main");
 
-import scroll from "./smoth-scroll"
+import scroll from "./smoth-scroll";
 
-
-var x, i, j, selElmnt, a, b, c;
+let x, i, j, selElmnt, a, b, c;
 x = document.getElementsByClassName("contact-select");
 for (i = 0; i < x.length; i++) {
   selElmnt = x[i].getElementsByTagName("select")[0];
@@ -16,8 +15,8 @@ for (i = 0; i < x.length; i++) {
   for (j = 1; j < selElmnt.length; j++) {
     c = document.createElement("DIV");
     c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-      var y, i, k, s, h;
+    c.addEventListener("click", function() {
+      let y, i, k, s, h;
       s = this.parentNode.parentNode.getElementsByTagName("select")[0];
       h = this.parentNode.previousSibling;
       for (i = 0; i < s.length; i++) {
@@ -44,15 +43,15 @@ for (i = 0; i < x.length; i++) {
     this.classList.toggle("select-arrow-active");
   });
 }
-function closeAllSelect(elmnt) {
+function closeAllSelect(el) {
   /*a function that will close all select boxes in the document,
   except the current select box:*/
   var x, y, i, arrNo = [];
   x = document.getElementsByClassName("select-items");
   y = document.getElementsByClassName("select-selected");
   for (i = 0; i < y.length; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
+    if (el == y[i]) {
+      arrNo.push(i);
     } else {
       y[i].classList.remove("select-arrow-active");
     }
@@ -67,26 +66,18 @@ function closeAllSelect(elmnt) {
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 
+const submitButton = document.getElementById("submitbutton");
+const selectInput = document.getElementById("form-select");
 
-
-const submitButton = document.getElementById('submitbutton');
-const selectInput = document.getElementById('form-select');
-
-
-
-selectInput.addEventListener('click', function (elem) {
+selectInput.addEventListener("click", function() {
   console.log(selectInput.value);
-  if (selectInput.value == 1){
-    submitButton.innerText = 'Place an Order';
-  }else if(selectInput.value == 2){
-    submitButton.innerText = 'Ask a Question';
-  }else{
-    submitButton.innerHTML = 'Submit';
+  if (selectInput.value == 1) {
+    submitButton.innerText = "Place an Order";
+  } else if (selectInput.value == 2) {
+    submitButton.innerText = "Ask a Question";
+  } else {
+    submitButton.innerHTML = "Submit";
   }
-
 });
-
-
-
 
 import slider from "./slider"

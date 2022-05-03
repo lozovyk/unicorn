@@ -1,4 +1,3 @@
-//@import "../../../node_modules/normalize-scss/sass/normalize";
 @import "../../../node_modules/normalize-scss/sass/normalize/import-now";
 @import "base/var";
 @import "common/general";
@@ -10,6 +9,6 @@
 @import "common/glihtbox";
 
 
-@import "intro";
-@import "gallery";
-@import "contact";
+@import "_intro";
+@import "_gallery";
+@import "_contact";
